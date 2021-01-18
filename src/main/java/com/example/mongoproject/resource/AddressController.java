@@ -7,6 +7,8 @@ import com.example.mongoproject.repo.User.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +32,10 @@ public class AddressController {
     }
 
     @GetMapping("/users")
-    public List<User> getUsers() {
+    public Page<User> getUsers() {
         log.debug("invoke -> '/api/users'");
-        return userRepo.custom();
+        Pageable pageable = PageRequest.of(0,2, Sort.by("address.city"));
+        return userRepo.custom(pageable);
     }
 
     @GetMapping("/test")

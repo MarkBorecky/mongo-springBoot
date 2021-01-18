@@ -5,9 +5,9 @@ inside the package - com.example.mongoproject.repo.User */
 package com.example.mongoproject.repo.User;
 
 import com.example.mongoproject.model.User;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserRepoCustom {
-    List<User> custom();
+    Page<User> custom(Pageable pageable);
 }

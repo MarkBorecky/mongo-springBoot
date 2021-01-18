@@ -1,10 +1,18 @@
 package com.example.mongoproject.model;
 
+import com.example.mongoproject.config.Entity;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
-public class User {
+public class User implements Entity<String> {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
     private String id;
     private String name;
